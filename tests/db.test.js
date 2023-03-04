@@ -1,15 +1,18 @@
-const request = require('request');
+import { dbClient } from '../utils/db';
+
 const { expect } = require('chai');
-import {dbClient} from '../utils/db.js';
 
 /**
  * Test case for the client Database
  */
 
-describe('Database is active', () => {
-    const client = dbClient;
-    it('database is alive' , (done) => {
-        expect(client.isAlive()).to.be.true;
-        done();
-    });
+describe('database is active', () => {
+  const client = dbClient;
+  expect.assertions(1);
+  // eslint-disable-next-line jest/prefer-expect-assertions
+  it('database is alive', (done) => {
+    // eslint-disable-next-line no-unused-expressions
+    expect(client.isAlive()).to.be.true;
+    done();
+  });
 });
