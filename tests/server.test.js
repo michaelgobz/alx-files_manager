@@ -5,20 +5,43 @@ const { expect } = require('chai');
  */
 
 describe('api Integration Test', () => {
-    before()
-    it('', (done) => {
+
+    const api = 'http://localhost:3000';
+
+    before('Start server', (done) => {
+    // check if server is running
+    request.get(`${api}/`), (err) => {
+        if (err) {
+            console.log('Server is not running');
+            process.exit(1);
+        } else {
+            console.log('Server is running');
+            done();
+      }
+    }
+    });
+
+    it('GET / return the correct status', (done) => {
+        request.get(`${api}/status`, (err, res, body) => {
+        });
 
     })
-    it('', (done) => {
+    it('GET / return the right stats', (done) => {
+        request.get(`${api}/stats`, (err, res, body) => {
+
+        });
 
     })
-    it('', (done) => {
+    it('POST / Add new User ', (done) => {
+        request.post(`${api}/user` ,(err, res, body) => {
+
+        })
 
     })
-    it('', (done) => {
+    it('GET / authenticate with the server', (done) => {
 
     })
-    it('', (done) => {
+    it('GE', (done) => {
 
     })
     it('', (done) => {
