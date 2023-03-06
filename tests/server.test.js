@@ -21,7 +21,7 @@ describe('api Integration Test', () => {
   it('GET /status:  returns the correct response', (done) => {
     request.get(`${api}/status`, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
-      expect(body).to.equal('OK');
+      expect(body).to.equal('{"redis":true, "db":true}');
       done();
     });
 
@@ -30,31 +30,58 @@ describe('api Integration Test', () => {
   it('GET /stats:  returns the correct response', (done) => {
     request.get(`${api}/stats`, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
-      expect(body).to.equal('OK');
+      expect(body).to.equal('{}');
       done();
     });
 
   });
 
   it('POST /users: returns the correct response ', (done) => {
-    request.post(`${api}/users`, (err, res, body) => {
+    const options = {
+      url: `${api}/users`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: 'bob@dylan.com', 
+        password: 'toto1234!',
+      }),
+    };
+    request.post(options, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
-      expect(body).to.equal('OK');
+      expect(body).to.equal('{}');
       done();
     });
 
   });
 
   it('GET /connect: returns correct response ', (done) => {
-    request.get(`${api}/connect`, (err, res, body) => {
+    const options = {
+      url: `${api}/connect`,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Basic Ym9iQGR5bGFuLmNvbTp0b3RvMTIzNCE=',
+      },
+    };
+
+    request.get(options, (err, res, body) => {
+      expect(res.authorization).to.be.true;
       expect(res.statusCode).to.equal(200);
-      expect(body).to.equal('OK');
+      expect(body).to.equal('{"token":"031bffac-3edc-4e51-aaae-1c121317da8a"}');
       done();
     });
 
   });
 
   it('GET /disconnect: returns the correct response', (done) => {
+    const options = {
+      url: `${api}/connect`,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Basic Ym9iQGR5bGFuLmNvbTp0b3RvMTIzNCE=',
+      },
+    };
+    
     request.get(`${api}/disconnect`, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
       expect(body).to.equal('OK');

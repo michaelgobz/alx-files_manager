@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import Queue from 'bull';
 import fs from 'fs';
 import mime from 'mime-types';
