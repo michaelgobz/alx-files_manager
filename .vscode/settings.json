@@ -3,6 +3,7 @@
         "Goboola",
         "katongole",
         "Middlewares",
-        "SETEX"
+        "SETEX",
+        "uuidv"
     ]
 }

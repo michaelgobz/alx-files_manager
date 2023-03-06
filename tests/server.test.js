@@ -8,7 +8,7 @@ const { expect } = require('chai');
 
 describe('api Integration Test', () => {
 
-  const api = 'http://localhost:3000';
+  const api = 'http://localhost:5000';
 
   before('Start server', (done) => {
     // check if server is running
@@ -26,11 +26,17 @@ describe('api Integration Test', () => {
     
   it('GET /status:  returns the correct response', (done) => {
     request.get(`${api}/status`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
     });
 
   })
   it('GET /stats:  returns the correct response', (done) => {
     request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
 
     });
 
@@ -42,35 +48,71 @@ describe('api Integration Test', () => {
 
   });
   it('GET /connect: returns correct response ', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
 
   })
   it('GET /disconnect: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
 
   });
   it('GET /users/me: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
 
   });
 
   it('POST /files/: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
 
   });
 
   it('GET /files/:id: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
       
   });
 
   it('PUT /files/:id/published/: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
 
   });
 
   it('PUT /files/:id/unpublished/: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
 
   });
 
   it('GET /files: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
   });
 
   it('GET /files/:id/data: returns the correct response', (done) => {
+    request.get(`${api}/stats`, (err, res, body) => {
+      expect(res.statusCode).to.equal(200);
+      expect(body).to.equal('OK');
+      done();
       
   });
 });
