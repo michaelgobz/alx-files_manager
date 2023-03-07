@@ -1,35 +1,28 @@
 // eslint-disable-next-line no-unused-vars
-import { Express } from 'express';
+import { express } from 'express';
 import AppController from '../controllers/AppController';
 import AuthController from '../controllers/AuthController';
 import UsersController from '../controllers/UsersController';
 import FilesController from '../controllers/FilesController';
 
-/**
- * Injects routes with their handlers to the given Express application.
- * @param {Express} api
- */
-const injectRoutes = (api) => {
-  api.get('/status', AppController.getStatus);
-  api.get('/stats', AppController.getStats);
+const router = express.Router();
 
-  api.get('/connect', AuthController.getConnect);
-  api.get('/disconnect', AuthController.getDisconnect);
+// GETs
+router.get('/status', AppController.getStatus);
+router.get('/stats', AppController.getStats);
+router.get('/connect', AuthController.getConnect);
+router.get('/disconnect', AuthController.getDisconnect);
+router.get('/users/me', UsersController.getMe);
+router.get('/files/:id', FilesController.getShow);
+router.get('/files', FilesController.getIndex);
+router.get('/files/:id/data', FilesController.getFile);
 
-  api.post('/users', UsersController.postNew);
-  api.get('/users/me', UsersController.getMe);
+// POSTs
+router.post('/users', UsersController.postNew);
+router.post('/files', FilesController.postUpload);
 
-  api.post('/files', FilesController.postUpload);
-  api.get('/files/:id', FilesController.getShow);
-  api.get('/files', FilesController.getIndex);
-  api.put('/files/:id/publish', FilesController.putPublish);
-  api.put('/files/:id/unpublish', FilesController.putUnpublish);
-  api.get('/files/:id/data', FilesController.getFile);
+// PUTs
+router.put('/files/:id/publish', FilesController.putPublish);
+router.put('/files/:id/unpublish', FilesController.putUnpublish);
 
-  api.all('*', (req, res, next) => {
-    errorResponse(new APIError(404, `Cannot ${req.method} ${req.url}`), req, res, next);
-  });
-  api.use(errorResponse);
-};
-
-export default injectRoutes;
+module.exports = router;

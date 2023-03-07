@@ -8,6 +8,7 @@
 /* eslint-disable jest/prefer-expect-assertions */
 const request = require('request');
 const { expect } = require('chai');
+
 /**
  * Api Integration test
  */
@@ -75,14 +76,14 @@ describe('api Integration Test', () => {
 
   it('GET /disconnect: returns the correct response', (done) => {
     const options = {
-      url: `${api}/connect`,
+      url: `${api}/disconnect`,
       headers: {
         'Content-Type': 'application/json',
         authorization: 'Basic Ym9iQGR5bGFuLmNvbTp0b3RvMTIzNCE=',
       },
     };
     
-    request.get(`${api}/disconnect`, (err, res, body) => {
+    request.get(options, (err, res, body) => {
       expect(res.statusCode).to.equal(200);
       expect(body).to.equal('OK');
       done();
